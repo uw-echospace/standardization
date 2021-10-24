@@ -6,8 +6,9 @@ Disruptive changes are preced by the prefixed **(D)**
 - **(D)** Add a `beam` dimension to `Beam` group
   - For single beam or split-beam, it could be a length-1 explicit dimension or an implicit coordinate (scalar `beam` )
   - For multi-beam, an explicit dimension is required. Currently the EK80 parser generates such a structure, but the dimension is named `quadrant` (WJ: there is an extra dimension quadrant — you can call them separate beams, but since Simrad use quadrant i used that for our first shot though I think it should be probably sector since it is not always 4)
-  - EM: It occurs to me now that, in terms of match-up with SONAR-netCDF4, the Beam group in AZFP and EK60 echopype nc/zarr files could be described as having an implicit, single-value `beam` dimension. Single-value dimensions can be implemented interchangeably in a netcdf file either explicitly with the dimension or implicitly (refer to the CF convention). In SONAR-netCDF4, since there is an explicit `beam` dimension, single-beam data would be expected to be stored with beam as a dimension.
-  - issue of convention use of "beam" dimension (ie, >1 beams per Beam subgroup? Based on "beam mode" alone?)
+  - EM: It occurs to me now that, in terms of match-up with SONAR-netCDF4, the Beam group in AZFP and EK60 echopype nc/zarr files could be described as having an implicit, single-value `beam` dimension. Single-value dimensions can be implemented interchangeably in a netcdf file either explicitly with the dimension or implicitly (refer to the CF convention). In SONAR-netCDF4, since there is an explicit `beam` dimension, single-beam data would be expected to be stored with `beam` as a dimension.
+  - issue of convention use of `beam` dimension (ie, >1 beams per Beam subgroup? Based on "beam mode" alone?)
+  - In the convention, under 2.10.6 (Sonar groups), it says: "Variable definitions for data from split-aperture systems are not currently specified"
 - `range_bin` issues
   - `range_bin` is not in the convention, but it's central to the echopype data structure
   - [Currently this coordinate variables doesn't have attributes.](https://github.com/OSOceanAcoustics/echopype/issues/373) Add units, long name, etc
