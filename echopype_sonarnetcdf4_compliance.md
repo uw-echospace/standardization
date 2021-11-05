@@ -19,10 +19,12 @@ Disruptive changes are preced by the prefixed **(D)**
   - `Sonar/sonar_serial_number` is empty. See [issue 212](https://github.com/OSOceanAcoustics/echopype/issues/212)
   - Populate `Sonar/sonar_software_name`. Right now it's left blank; see [convert/set_groups_ek60.py#L89](https://github.com/OSOceanAcoustics/echopype/blob/class-redesign/echopype/convert/set_groups_ek60.py#L89) and [issue 210 comment](https://github.com/OSOceanAcoustics/echopype/issues/210#issuecomment-822642399)
   - `Sonar/sonar_model attribute` entry is "ER60". It should be EK60. Currently EK60 `Sonar/sonar_model` is set in [convert/set_groups_ek60.py#L87](https://github.com/OSOceanAcoustics/echopype/blob/class-redesign/echopype/convert/set_groups_ek60.py#L87) as `self.parser_obj.config_datagram['sounder_name']`, so that looks fine, unless the datagram `sounder_name` is parsed incorrectly. See [issue 210 comment](https://github.com/OSOceanAcoustics/echopype/issues/210#issuecomment-821761942)
-  - `Provenance > src_filenames` should be a list of strings per the convention, but currently it's a string (actually, it's a string only when there's only one filename; it's turned into a list of strings after `combine_echodata`). It's also mispelled, as it should be `source_filenames`.
+  - *(NOTE: This issue may be broader than EK60)* `Provenance > src_filenames` should be a list of strings per the convention, but currently it's a string (actually, it's a string only when there's only one filename; it's turned into a list of strings after `combine_echodata`). It's also mispelled, as it should be `source_filenames`.
 - **Reassess AZFP compliance, and primary issues**
   - There are many first-order issues!
   - Some of the comments under EK60 also apply to AZFP
+- **Assess EK80**
+  - I haven't assessed it at all
 - **Improved global attributes**
   - `survey_name` top-level attribute is not in the convention
   - When an attribute is empty (specially global attributes), should it still occur but with a blank value, or be ommitted altogether? Current implementation is inconsistent
