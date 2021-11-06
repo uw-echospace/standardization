@@ -55,7 +55,6 @@ Disruptive changes are preced by the prefixed **(D)**
 
 - https://github.com/ices-publications/SONAR-netCDF4/ (see the "latest working draft" linked on the README file)
 - [Published SONAR-netCDF4 version 1.0 report](http://www.ices.dk/sites/pub/Publication%20Reports/Cooperative%20Research%20Report%20(CRR)/CRR341.pdf)
-- [Preview of the latest working draft ("version 2.0")](https://gitcdn.link/repo/ices-publications/SONAR-netCDF4/master/Formatted_docs/crr341.html0
+- [Preview of the latest working draft ("version 2.0")](https://gitcdn.link/repo/ices-publications/SONAR-netCDF4/master/Formatted_docs/crr341.html)
 - My spreadsheet version of the SONAR-netCDF4-CDLtables CDL-like tables from the vers. 1.0 report: [SONAR-netCDF4-CDLtables.xlsx](https://docs.google.com/spreadsheets/d/13iitnfHVdX_4tTNjUP99YKwgNrrBYEjv/edit#gid=1702761048)
 - [convention_definition.ncml](https://github.com/ices-publications/SONAR-netCDF4/blob/master/docs/convention_definition.ncml)
-
