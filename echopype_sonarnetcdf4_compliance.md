@@ -14,7 +14,32 @@ Disruptive changes are preced by the prefixed **(D)**
   - [Currently this coordinate variables doesn't have attributes.](https://github.com/OSOceanAcoustics/echopype/issues/373) Add units, long name, etc
   - small TODO, WJ's "convention vlen" comments. See also [this discussion in the SONAR-netCDF4 github repo](https://github.com/ices-publications/SONAR-netCDF4/issues/28) that directly addresses that aspect of the convention, and potential problems with it
 - **(D)** Rename `time` dimensions and coordinates in `Platform` group, to adhere to the convention naming guideline. `location_time` does not comply; it should be `time1`, `time2`, etc
-- Restart the element-by-element compliance check tables
+- [Compliance of variable encoding (`frequency` only?) in converted files, #307](https://github.com/OSOceanAcoustics/echopype/issues/307)
+- Restart the element-by-element compliance check tables. See section below
+- **Improved global attributes**
+  - `survey_name` top-level attribute is not in the convention
+  - When an attribute is empty (specially global attributes), should it still occur but with a blank value, or be ommitted altogether? Current implementation is inconsistent
+  - Add missing core CF attributes (feature_type, cdm, etc), where appropriate
+  - Add some useful attributes from ACDD, specially ones involving spatial and temporay bounding boxes; roles; etc; in top-level group? Will improve discoverability.
+  - See AcMeta to see if we can define an initial subset of it that ideally follows the ACDD attributes we'd be interested in
+- **Go over other relevant discussions and notes, to see if I'm missing anything**
+  - Google Drive files (mappings, sample nc files, etc) under [echopype/convention_check](https://drive.google.com/drive/u/0/folders/1MPBRzrehXk9qAt8ZuBjFzR2Xh-0WFXXU)
+  - [Document and verify compliance with SONAR-netCDF4 convention #210](https://github.com/OSOceanAcoustics/echopype/issues/210). Though we've closed this issue b/c it became sprawling, it still contains many important details that we'll refer back to.
+  - echopype open issues with a [conventions](https://github.com/OSOceanAcoustics/echopype/issues?q=is%3Aissue+is%3Aopen+label%3Aconventions) flag.
+  - echopype documentation: [Data format](https://echopype.readthedocs.io/en/stable/data-format.html) and [Why echopype?](https://echopype.readthedocs.io/en/stable/why.html)
+  - `conventions/SONAR-netCDF4_compliance.ipynb`: code and file instrospection, and comments I've added there
+  - I think I've already captured notes from these sources:
+    - `sonar-conventions` Slack channel in `uw-echospace` workspace. Going back to the start of the channel in April '21
+    - My hand written notes on the SONAR-netCDF4 report
+
+## Convention compliance assessment and corrections by sensor
+
+- From an earlier plan: We've laid out the sequence of tasks as follows:
+  1. 1:1 mappings of variables, attributes and groups. Includes things only found in one of them (?).
+  2. Content of variables, attributes and groups
+  3. Things that are intentionally different, or diverged unintentionally
+- Google Drive files (mappings, sample nc files, etc) under [echopype/convention_check](https://drive.google.com/drive/u/0/folders/1MPBRzrehXk9qAt8ZuBjFzR2Xh-0WFXXU)
+- See the preliminary, per-sensor compliance Google sheets; eg, [EK60](https://docs.google.com/spreadsheets/d/1DXQtYPr-k7BDwaAa2a-yDO8sxt7QUSU6P-icedGKkX0/edit#gid=0)
 - **Fix current errors/issues with EK60**
   - `Sonar/sonar_serial_number` is empty. See [issue 212](https://github.com/OSOceanAcoustics/echopype/issues/212)
   - Populate `Sonar/sonar_software_name`. Right now it's left blank; see [convert/set_groups_ek60.py#L89](https://github.com/OSOceanAcoustics/echopype/blob/class-redesign/echopype/convert/set_groups_ek60.py#L89) and [issue 210 comment](https://github.com/OSOceanAcoustics/echopype/issues/210#issuecomment-822642399)
@@ -24,22 +49,8 @@ Disruptive changes are preced by the prefixed **(D)**
   - There are many first-order issues!
   - Some of the comments under EK60 also apply to AZFP
 - **Assess EK80**
-  - I haven't assessed it at all
-- **Improved global attributes**
-  - `survey_name` top-level attribute is not in the convention
-  - When an attribute is empty (specially global attributes), should it still occur but with a blank value, or be ommitted altogether? Current implementation is inconsistent
-  - Add missing core CF attributes (feature_type, cdm, etc), where appropriate
-  - Add some useful attributes from ACDD, specially ones involving spatial and temporay bounding boxes; roles; etc; in top-level group? Will improve discoverability.
-  - See AcMeta to see if we can define an initial subset of it that ideally follows the ACDD attributes we'd be interested in
-- **Go over other relevant discussions and notes, to see if I'm missing anything**
-  - Google Drive files (mappings, sample nc files, etc) under [echopype/convention_check](https://drive.google.com/drive/u/0/folders/1MPBRzrehXk9qAt8ZuBjFzR2Xh-0WFXXU)
-  - [Document and verify compliance with SONAR-netCDF4 convention #210](https://github.com/OSOceanAcoustics/echopype/issues/210)
-  - echopype documentation: [Data format](https://echopype.readthedocs.io/en/stable/data-format.html) and [Why echopype?](https://echopype.readthedocs.io/en/stable/why.html)
-  - `conventions/SONAR-netCDF4_compliance.ipynb`: code and file instrospection, and comments I've added there
-  - I think I've already captured notes from these sources:
-    - `sonar-conventions` Slack channel in `uw-echospace` workspace. Going back to the start of the channel in April '21
-    - My hand written notes on the SONAR-netCDF4 report
-  
+  - I haven't assessed it at all. Use one of Wu-Jung's new, small EK80 raw files to make this assessment
+
 ## SONAR-netCDF4 References
 
 - https://github.com/ices-publications/SONAR-netCDF4/ (see the "latest working draft" linked on the README file)
